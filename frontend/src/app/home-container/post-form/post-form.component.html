@@ -1,0 +1,19 @@
+<div class="post-form-wrapper">
+    <div class="inner-wrap">
+        <h4 style="text-align: center;" class="post-form-title" >Post something</h4>
+        <div class="first-row">
+            <div class="img-wrapper">
+                <img src="auth-first-background.jpg" width="50px">
+            </div>
+            <div class="input-wrapper">
+                <textarea type="text" [(ngModel)]="postText" class="form-control text-area" placeholder="What's on your mind ?"></textarea>
+            </div>
+        </div>
+        <div class="second-row choose-img-vid">
+            <input value="Choose an image" type="file" class="btn cf-input">
+        </div>
+        <div class="post-btn-wrapper">
+            <button (click)="addPost()" class="btn btn-primary">Post</button>            
+        </div>
+    </div>
+</div>

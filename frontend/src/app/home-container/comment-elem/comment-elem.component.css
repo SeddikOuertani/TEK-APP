@@ -1,0 +1,45 @@
+.comment-wrapper{
+    margin-bottom: 1vh;
+    padding: 5px;
+}
+
+.comment-header{
+    display: flex;
+    direction: ltr;
+    gap : 1vh
+}
+
+.pfp-img-wrapper{
+    flex-wrap: wrap;
+}
+
+
+.pfp-img{
+    border-radius: 5px;
+}
+
+.user-name{
+    flex : 1;
+    font-weight: 500;
+}
+.comment-date{
+    flex-wrap: wrap;
+    text-align: right;
+    font-weight: 600;
+    font-size: smaller;
+}
+
+.comment-body{
+    margin-top: 1vh;
+    margin-left: 1vh;
+    border-radius: 7px;
+}
+
+.comment-text{
+    background-color : white;
+    width : min-content;
+    word-wrap: break-word;
+    padding-right : 10px;
+    padding-left : 10px; 
+    border-radius : 5px;
+}

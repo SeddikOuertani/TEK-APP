@@ -1,0 +1,26 @@
+.home-container{
+    background-color: rgb(235, 235, 235);
+    height: 100vh;
+    padding: 1vh;
+    padding-bottom: 1vh;
+}
+
+.below-nav {
+    margin-top: 1vh;
+    display: flex;
+    direction: ltr;
+    column-gap: 1vh;
+    width: 100%;
+    background-color: rgb(235, 235, 235);
+}
+
+.main-col{
+    flex : 1.5
+}
+
+.ends-col {
+    flex : 1;
+}
+
+.chats-list-components{
+}
