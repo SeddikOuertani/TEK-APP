@@ -10,10 +10,10 @@
             </div>
         </div>
         <div class="second-row choose-img-vid">
-            <input value="Choose an image" type="file" class="btn cf-input">
+            <input [(ngModel)]="postImage" value="Choose an image" type="file" class="form-control-file cf-input">
         </div>
         <div class="post-btn-wrapper">
-            <button (click)="addPost()" class="btn btn-primary">Post</button>            
+            <button (click)="addPost()" type="submit" class="btn btn-primary">Post</button>            
         </div>
     </div>
 </div>

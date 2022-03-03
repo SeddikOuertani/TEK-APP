@@ -13,6 +13,7 @@ export class PostFormComponent implements OnInit {
 
   postText = ""
   userId : any;
+  postImage : any;
 
   constructor(
     private postService: PostService,
@@ -49,7 +50,8 @@ export class PostFormComponent implements OnInit {
       idUser : user._id, 
       creationDate : newDate,
       userName : user.name+" "+user.lastName,
-      userPfp : user.imgUrl,  
+      userPfp : user.imgUrl,
+      media : this.postImage
     }
     return post;
   }

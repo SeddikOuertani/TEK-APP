@@ -11,7 +11,7 @@ let Post = new Schema({
         userName : {
             type : String
         },
-        mediaUrl : {
+        media : {
             type: String
         },
         creationDate : {
