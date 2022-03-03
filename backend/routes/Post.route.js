@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express();
 const postRoute = express.Router();
+const formidable = require('formidable')
+
 // Postmodel
 let Post = require('../models/Post');
 // Add Post
 postRoute.route('/create').post((req, res, next) => {
-  Post.create(req.body, (error, data) => {
+  
+  const form = formidable ({multiples : true});
+
+  Post.create(req, (error, data) => {
     if (error) {
       return next(error)
     } else {
