@@ -9,6 +9,7 @@ let Post = require('../models/Post');
 postRoute.route('/create').post((req, res, next) => {
   
   const form = formidable ({multiples : true});
+  
 
   Post.create(req, (error, data) => {
     if (error) {
