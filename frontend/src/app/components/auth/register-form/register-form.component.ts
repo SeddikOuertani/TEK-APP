@@ -43,21 +43,23 @@ export class RegisterFormComponent implements OnInit {
       this.isPasswordValid() &&
       this.isPassIdentical())
     { 
-        // if inputs Valid
+        
       this.userService.createUser({
         name: this.name,
         lastName : this.lastName,
         email : this.email.toLowerCase(),
         password : this.password,
         authenticated : false,
-        imgUrl : "default_pfp.jpg"
-      }).subscribe(
-        (res) => {
+        imgUrl : undefined,
+      }).subscribe({
+        next : (res) => {
           console.log('User successfully created!')
           this.ngZone.run(() => this.router.navigateByUrl('/'))
-        }, (error) => {
+        }, 
+        error : (error) => {
           console.log(error);
-        });
+        }
+      })
 
       console.log("valid");
       

@@ -23,7 +23,7 @@ postRoute.route('/create').post(uploadMedia.uploadPic().array('media') ,async (r
         return next(error)
       }
       else {
-        res.json(data)
+        res.json(data);
       }
   })
 

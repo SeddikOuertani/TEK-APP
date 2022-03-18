@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class UserDefaultPfpPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(userPfp : string | undefined): string {
+    return userPfp?userPfp:"assets/images/default-pfp.jpg"
   }
 
 }

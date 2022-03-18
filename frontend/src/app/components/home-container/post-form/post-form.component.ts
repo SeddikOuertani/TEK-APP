@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ElementRef } from '@angular/core';
+import { Component, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Router } from '@angular/router';
 import { SharingService } from 'src/app/services/sharing.service';
@@ -12,10 +12,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class PostFormComponent implements OnInit {
 
   postText = ""
-  userId : any;
+  idUser : any;
   postImage : any;
   imageChosen : boolean = false;
   submitted : boolean = false;
+
+  @Output() postSumbitted = new EventEmitter<boolean>();
 
   postForm = new FormGroup({
     text : new FormControl(''),
@@ -26,13 +28,10 @@ export class PostFormComponent implements OnInit {
     private router : Router,
     private sharingService : SharingService,
     private ngZone : NgZone,) { 
-
-    
     }
 
   ngOnInit(): void {
-    console.log("ngOnInit post-Form")
-    console.log(new Date())
+    this.idUser = this.sharingService.getUserSettings()._id
   }
 
   addPost(){
@@ -41,7 +40,7 @@ export class PostFormComponent implements OnInit {
 
     let fd = new FormData();
     fd.append("text",this.postForm.controls['text'].value)
-    fd.append("idUser",this.userId);
+    fd.append("idUser",this.idUser);
     fd.append("creationDate",new Date().toString());
 
     if(this.postImage){
@@ -54,8 +53,15 @@ export class PostFormComponent implements OnInit {
           console.log('Post successfully created!')
           this.ngZone.run(() => this.router.navigateByUrl('/home'))
 
+          //notifying parent that post is sumbitted
+          this.postSumbitted.emit(this.submitted)
+
+          //resetting Form fields
+          
           this.submitted = false;
           this.imageChosen = false;
+          this.postImage = undefined;
+          this.postText = "";
         },
         error : (error) => {
           console.log(error);
@@ -69,4 +75,6 @@ export class PostFormComponent implements OnInit {
       this.imageChosen = true
     }
   }
+
+  
 }

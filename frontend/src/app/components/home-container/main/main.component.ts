@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 import { SharingService } from 'src/app/services/sharing.service';
@@ -10,9 +10,19 @@ import { SharingService } from 'src/app/services/sharing.service';
 })
 export class MainComponent implements OnInit {
 
+  refresh = ""
+
   constructor() { }
 
   ngOnInit(): void {
 
+  }
+
+  refreshPostList(event : any){
+    this.refresh = "ref"
+  }
+
+  resRef(event : any){
+    this.refresh = ""
   }
 }

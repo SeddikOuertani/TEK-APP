@@ -6,8 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TimePipe implements PipeTransform {
 
   transform(dateString : Date): string {
-  
-    console.log("TimePeriod Pipe : ")
     
      // return daysPeriod.toString();
     return this.choosePeriod(dateString);

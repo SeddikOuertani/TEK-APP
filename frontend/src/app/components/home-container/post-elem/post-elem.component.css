@@ -16,7 +16,11 @@
     background-color: white;
 }
 
-.body-image-wrap{
+.user-name-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-left: 1vw;
 }
 
 .body-text-wrap{

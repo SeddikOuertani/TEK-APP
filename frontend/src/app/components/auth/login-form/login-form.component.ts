@@ -51,6 +51,7 @@ export class LoginFormComponent implements OnInit {
               //Updating user.authenticated to true
               this.updateAuthState(res._id)
               // Load User ID into State
+              this.sharingService.setSettings(res)
               // Redirect to home page
               this.ngZone.run(() => {  
                 this.router.navigate(['/home/main'], {state : {user : res}}) 

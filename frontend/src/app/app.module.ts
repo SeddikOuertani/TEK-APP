@@ -47,6 +47,7 @@ import { ChatElemComponent } from './components/home-container/chat-elem/chat-el
 import { TimePipe } from './pipes/time.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserDefaultPfpPipe } from './pipes/user-default-pfp.pipe';
+import { PostMediaPipe } from './pipes/post-media.pipe';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { UserDefaultPfpPipe } from './pipes/user-default-pfp.pipe';
     ChatElemComponent,
     TimePipe,
     UserDefaultPfpPipe,
+    PostMediaPipe,
   ],
   imports: [
     HttpClientModule,
