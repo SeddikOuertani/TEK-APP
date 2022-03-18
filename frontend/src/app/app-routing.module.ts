@@ -9,7 +9,6 @@ import { EventsListComponent } from './components/home-container/events-list/eve
 import { FeatsListComponent } from './components/home-container/feats-list/feats-list.component';
 import { ClubsListComponent } from './components/home-container/clubs-list/clubs-list.component';
 import { GroupsListComponent } from './components/home-container/groups-list/groups-list.component';
-
 const routes: Routes = [
     { path: 'authentication', component: AuthComponent },
     { path: '',   redirectTo: '/authentication', pathMatch: 'full'},

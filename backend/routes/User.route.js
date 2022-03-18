@@ -3,13 +3,17 @@ const app = express();
 const userRoute = express.Router();
 // User model
 let User = require('../models/User');
+
+//importing formidable-express middleware for uploading files
+
 // Add User
 userRoute.route('/create').post((req, res, next) => {
-  User.create(req.body, (error, data) => {
+
+  User.create(req, (error, data) => {
     if (error) {
-      return next(error)
+      return next(error);
     } else {
-      res.json(data)
+      res.json(data);
     }
   })
 });

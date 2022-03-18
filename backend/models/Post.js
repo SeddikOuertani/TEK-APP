@@ -2,24 +2,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // Define collection and schema
 let Post = new Schema({
-        text: {
-            type: String
-        },
+        
         idUser : {
             type : String
         },
-        userName : {
-            type : String
+        text: {
+            type: String
         },
         media : {
-            type: String
+            fieldname : { type : String },
+            originalname : { type : String },
+            encoding : { type : String },
+            encoding : { type : String },
+            mimetype : { type : String },
+            buffer : { type : Buffer },
         },
         creationDate : {
             type : Date
         },
-        userPfp:{
-            type : String
-        }
     },
     { collection: 'posts'}
 )

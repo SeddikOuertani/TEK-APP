@@ -19,10 +19,11 @@ mongoose.connect(dbConfig.db, {
 const userRoute = require('./routes/user.route');
 const postRoute = require('./routes/post.route');
 const galleryRoute = require('./routes/Gallery.route');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-   extended: false
+   extended: true
 }));
 app.use(cors()); 
 app.use(express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));

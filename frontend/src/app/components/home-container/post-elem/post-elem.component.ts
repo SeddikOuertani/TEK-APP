@@ -27,6 +27,7 @@ export class PostElemComponent implements OnInit {
     private route : ActivatedRoute) { }
 
   ngOnInit(): void {
+    
   }
 
 }

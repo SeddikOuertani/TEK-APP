@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppContainerComponent } from './components/app-container/app-container.component';
@@ -45,6 +46,7 @@ import { ClubElemComponent } from './components/home-container/club-elem/club-el
 import { ChatElemComponent } from './components/home-container/chat-elem/chat-elem.component';
 import { TimePipe } from './pipes/time.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserDefaultPfpPipe } from './pipes/user-default-pfp.pipe';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ClubElemComponent,
     ChatElemComponent,
     TimePipe,
+    UserDefaultPfpPipe,
   ],
   imports: [
     HttpClientModule,
@@ -91,6 +94,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     FormsModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
     NgbModule,
   ],
   providers: [

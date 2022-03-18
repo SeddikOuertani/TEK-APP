@@ -9,9 +9,14 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 export class PostService {
 
   baseUrl:string = 'http://localhost:4000/api/posts'; 
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  headers = new HttpHeaders({
+    Accept: 'application/json',
+    'Content-Type' : 'multipart/form-data',
+  })
 
   constructor(private http : HttpClient) { }
+
+
 
     // Create
     createPost(data : any): Observable<any> {

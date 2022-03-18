@@ -1,23 +1,32 @@
 const express = require('express');
-const app = express();
 const postRoute = express.Router();
-const formidable = require('formidable')
-
+const multer = require('multer');
 // Postmodel
 let Post = require('../models/Post');
-// Add Post
-postRoute.route('/create').post((req, res, next) => {
-  
-  const form = formidable ({multiples : true});
-  
+// Add Post const
 
-  Post.create(req, (error, data) => {
-    if (error) {
+//multer for pic upload
+const uploadMedia = require('../middleware/picUpload')
+
+postRoute.route('/create').post(uploadMedia.uploadPic().array('media') ,async (req, res, next) => {
+
+  let newPost = req.body;
+  if(req.files[0]){
+    newPost.media = req.files[0]
+  }
+
+  Post.create(newPost, (error, data) => {
+    if (error instanceof multer.MulterError ) {
+      error.message += "\nmulter Error";
       return next(error)
-    } else {
-      res.json(data)
-    }
+    }else if (error){
+        return next(error)
+      }
+      else {
+        res.json(data)
+      }
   })
+
 });
 // Get All Posts
 postRoute.route('/').get((req, res) => {
