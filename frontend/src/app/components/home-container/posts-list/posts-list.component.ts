@@ -13,7 +13,7 @@ export class PostsListComponent implements OnInit, OnChanges {
   @Output() resetRefresh = new EventEmitter()
 
   posts : any;
-  user : any;
+  currentUser : any;
 
   constructor(
     private postService : PostService,
@@ -21,14 +21,13 @@ export class PostsListComponent implements OnInit, OnChanges {
      }
 
   ngOnInit(): void {
-    this.user = this.sharingService.getUserSettings();
+    this.currentUser = this.sharingService.getUserSettings();
     this.readPosts();
   }
 
   ngOnChanges(changes: SimpleChanges ): void {
     let refreshChange: SimpleChange = changes['refresh']; 
     if(refreshChange.currentValue != refreshChange.previousValue){
-      this.readPosts();
       this.refresh = ""
     }
   }

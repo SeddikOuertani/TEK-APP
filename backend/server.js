@@ -15,10 +15,13 @@ mongoose.connect(dbConfig.db, {
       console.log('Database could not connected: ' + error)
    }
 )
-// Setting up port with express js
+
 const userRoute = require('./routes/user.route');
 const postRoute = require('./routes/post.route');
 const galleryRoute = require('./routes/Gallery.route');
+const likeRoute = require('./routes/Like.Route');
+const commentRoute = require('./routes/Comment.route');
+const shareRoute = require('./routes/Share.route')
 
 const app = express();
 app.use(bodyParser.json());
@@ -30,7 +33,11 @@ app.use(express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
 app.use('/', express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
 app.use('/api/users', userRoute);
 app.use('/api/posts', postRoute);
-app.use('/api/gallery',galleryRoute)
+app.use('/api/gallery',galleryRoute);
+app.use('/api/likes',likeRoute);
+app.use('/api/shares',shareRoute);
+app.use('/api/comment',commentRoute);
+
 // Create port
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {

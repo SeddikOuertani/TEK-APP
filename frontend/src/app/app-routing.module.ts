@@ -42,7 +42,7 @@ const routes: Routes = [
                 component : GroupsListComponent
             }
         ]},  
-    { path : 'profile', component : ProfileComponent},
+    { path : 'profile/:id', component : ProfileComponent},
 ];
 
 @NgModule({ 

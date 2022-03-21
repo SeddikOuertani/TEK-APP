@@ -11,6 +11,11 @@
     padding : 10px;
 }
 
+.header-first-row{
+    display: flex;
+    direction: ltr;
+}
+
 .white{
     border-radius: 10px;
     background-color: white;
@@ -19,7 +24,7 @@
 .user-name-wrap{
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     margin-left: 1vw;
 }
 
@@ -30,15 +35,13 @@
 
 .post-body{
     width: 100%;
+    border-radius: 10px;
+    background-color: white;
 }
 
 .body-text{
-    padding : 10px    
-}
-
-.header-first-row{
-    display: flex;
-    direction: ltr;
+    padding : 1vh;
+    text-align: left; 
 }
 
 .date-wrap{
@@ -62,6 +65,40 @@
 
 .reaction-row{
     text-align: center;
+    font-size: 17;
+    font-weight: bolder;
+}
+
+.reactions-count-wrapper{
+    margin : 1vh 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding : 3px 5px;
+    column-gap : 1vw;
+}
+
+.likes-count{
+    text-align: start;
+    flex : 1;
+}
+
+.react-count-font{
+    color : grey;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.react-count-font:hover{
+    text-decoration: underline;
+}
+
+.comments-count{
+    text-align: end;
+}
+
+.shares-count{
+    text-align: end;
 }
 
 .react-sect{

@@ -13,23 +13,37 @@
         </div>
     </div>
     <div class="post-body">
-        <div class="white">
-            <div class="body-text-wrap">
-                <p class="body-text"> {{post?.text}} </p>
-            </div>
-            <div  *ngIf="media" class="body-image-wrap">
-                <img [src]="media | postMedia" width="100%" alt="">
-            </div>
-            <hr>
-            <app-post-reaction-row></app-post-reaction-row>
-            <hr>
-            <div class="make-comment-wrapper">
-                <app-comment-form></app-comment-form>
-            </div>
+        <div class="body-text-wrap">
+            <p class="body-text"> {{post?.text}} </p>
         </div>
-        <div class="comments-list-wrapper">
-            <app-comment-list></app-comment-list>
+        <div  *ngIf="media" class="body-image-wrap">
+            <img [src]="media | postMedia" width="100%" alt="">
         </div>
-    
+        
+        <div class="reactions-count-wrapper">
+            <div  class="likes-count" >   
+                <div class="react-count-font">
+                    <fa-icon class="fa-sm" [icon]="likeIcon"></fa-icon>
+                    <span style="margin-left : 5px">{{likesCount}}</span>
+                </div>
+            </div>
+            <div class="comments-count"><span class="react-count-font">23 comments</span></div>
+            <div class="shares-count"><span class="react-count-font">14 shares</span></div>
+        </div>
+
+        <hr>
+        <app-post-reaction-row
+            [likeFound]="currentUserLikeFound"
+            (likePressed)="addOrDeleteLike($event)"
+            (commentPressed)="addComment($event)"
+            (sharePressed)="addShare($event)">
+        </app-post-reaction-row>
+        <hr>
+        <div class="make-comment-wrapper">
+            <app-comment-form></app-comment-form>
+        </div>
+    </div>
+    <div class="comments-list-wrapper">
+        <app-comment-list></app-comment-list>
     </div>
 </div>

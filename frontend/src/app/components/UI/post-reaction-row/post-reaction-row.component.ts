@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { faComment, faShare, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,9 +13,45 @@ export class PostReactionRowComponent implements OnInit {
   commentIcon = faComment;
   shareIcon = faShare;
 
+  @Input() likeFound !: boolean;
+
+  @Output() likePressed = new EventEmitter<boolean>();
+  @Output() commentPressed = new EventEmitter<boolean>()
+  @Output() sharePressed = new EventEmitter<boolean>()
+
+  @ViewChild('likeElem') likeElem !: ElementRef
+  @ViewChild('commentElem') commentElem !: ElementRef
+  @ViewChild('shareElem') shareElem !: ElementRef
+  
   constructor() { }
 
   ngOnInit(): void {
+    this.isLikeFound();
+  }
+
+  isLikeFound(){
+    if(this.likeFound){
+      this.likeElem.nativeElement.classList.add('reaction-pressed');
+    }
+  }
+
+  likePress(){
+    this.likePressed.emit(true)
+    this.togglePressedStyle(this.likeElem);
+  }
+
+  commentPress(){
+    this.commentPressed.emit(true)
+    this.togglePressedStyle(this.commentElem);
+  }
+  
+  sharePress(){
+    this.sharePressed.emit(true)
+    this.togglePressedStyle(this.shareElem);
+  }
+
+  togglePressedStyle(elem : ElementRef){
+    elem.nativeElement.classList.toggle('reaction-pressed')
   }
 
 }
