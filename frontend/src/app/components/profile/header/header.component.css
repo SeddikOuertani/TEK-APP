@@ -25,6 +25,30 @@
     box-shadow: rgba(0, 0, 0, 0,5) 2px 2px 2px;
 }
 
+.profile-picture-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-picture-wrapper:hover{
+    filter : brightness(80%);
+    cursor : pointer;
+}
+
+.profile-picture-wrapper:hover .pfp-edit-icon{
+    display: block;
+}
+
+.pfp-edit-icon{
+    color : black;
+    position: absolute;
+    top : 0;
+    right: 0;
+    display: none;
+    z-index: 50;
+}
+
 .change-cover-button{
     margin-top: -40px;
     margin-right: -20px;

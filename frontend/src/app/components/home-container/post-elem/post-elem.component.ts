@@ -46,8 +46,6 @@ export class PostElemComponent implements OnInit {
 
     //get Current user ID
     this.currentUser = this.sharingService.getUserSettings()
-    console.log(this.currentUser)
-    console.log(this.idPost)
 
     //get post Creator info
     this.getPostUser()
@@ -97,7 +95,6 @@ export class PostElemComponent implements OnInit {
       next : (res) => {
         let likes = res
         Object.values(likes).forEach((like : any) => this.likes.push(new Like(like._id,like.userId,like.parentId)))
-        console.log(this.likes)
         this.likesCount = this.likes.length
       },
       error : (err) => {
@@ -110,7 +107,6 @@ export class PostElemComponent implements OnInit {
     console.log("like pressed")
     this.likeService.createOrDeleteLike(this.currentUser._id, this.idPost).subscribe({
       next : (res) => {
-        console.log("like added successfully")
         this.getLikes()
       },
       error : (err) => {

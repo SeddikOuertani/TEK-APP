@@ -28,6 +28,7 @@ postRoute.route('/create').post(uploadMedia.uploadPic().array('media') ,async (r
   })
 
 });
+
 // Get All Posts
 postRoute.route('/').get((req, res) => {
   Post.find((error, data) => {
@@ -38,7 +39,19 @@ postRoute.route('/').get((req, res) => {
     }
   })
 })
-// Get single Post
+
+// Get post list by user id
+postRoute.route('/byUserId/:idUser').get((req, res, next) => {
+  Post.find ({idUser : req.params.idUser},(error, data) => {
+    if(error){
+      return next(error);
+    }else{
+      res.json(data)
+    }
+  })
+})
+
+// Get single Post by post id
 postRoute.route('/read/:id').get((req, res) => {
   Post.findById(req.params.id, (error, data) => {
     if (error) {

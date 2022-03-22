@@ -11,11 +11,13 @@ import { SharingService } from 'src/app/services/sharing.service';
 export class MainComponent implements OnInit {
 
   refresh = ""
+  posts = []
 
-  constructor() { }
+  constructor(
+    private postService : PostService) { }
 
   ngOnInit(): void {
-
+    this.getPosts()
   }
 
   refreshPostList(event : any){
@@ -24,5 +26,17 @@ export class MainComponent implements OnInit {
 
   resRef(event : any){
     this.refresh = ""
+  }
+
+  getPosts(){
+    this.postService.getPosts().subscribe({
+      next : (res : any) => {
+        this.posts = res
+      },
+      error : (err : any) => {
+        console.log("error getting posts");
+        console.log(err)
+      }
+    })
   }
 }

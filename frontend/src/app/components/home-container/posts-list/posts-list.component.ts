@@ -7,12 +7,13 @@ import { SharingService } from 'src/app/services/sharing.service';
   templateUrl: './posts-list.component.html',
   styleUrls: ['./posts-list.component.css']
 })
-export class PostsListComponent implements OnInit, OnChanges {
+export class PostsListComponent implements OnInit {
 
   @Input() refresh = "";
+  @Input() posts : any;
+
   @Output() resetRefresh = new EventEmitter()
 
-  posts : any;
   currentUser : any;
 
   constructor(
@@ -22,27 +23,6 @@ export class PostsListComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.currentUser = this.sharingService.getUserSettings();
-    this.readPosts();
-  }
-
-  ngOnChanges(changes: SimpleChanges ): void {
-    let refreshChange: SimpleChange = changes['refresh']; 
-    if(refreshChange.currentValue != refreshChange.previousValue){
-      this.refresh = ""
-    }
-  }
-  
-  readPosts(){
-    this.postService.getPosts().subscribe(
-      {
-        next: (res)=>{
-          this.posts = res
-        },
-        error: (err)=>{
-
-        }
-      }
-    )
   }
 
   resRef(){

@@ -21,7 +21,8 @@ const postRoute = require('./routes/post.route');
 const galleryRoute = require('./routes/Gallery.route');
 const likeRoute = require('./routes/Like.Route');
 const commentRoute = require('./routes/Comment.route');
-const shareRoute = require('./routes/Share.route')
+const shareRoute = require('./routes/Share.route');
+const profilePicRoute = require('./routes/ProfilePic.route');
 
 const app = express();
 app.use(bodyParser.json());
@@ -33,10 +34,11 @@ app.use(express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
 app.use('/', express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
 app.use('/api/users', userRoute);
 app.use('/api/posts', postRoute);
-app.use('/api/gallery',galleryRoute);
-app.use('/api/likes',likeRoute);
-app.use('/api/shares',shareRoute);
-app.use('/api/comment',commentRoute);
+app.use('/api/gallery', galleryRoute);
+app.use('/api/likes', likeRoute);
+app.use('/api/shares', shareRoute);
+app.use('/api/comment', commentRoute);
+app.use('/api/profilePic', profilePicRoute);
 
 // Create port
 const port = process.env.PORT || 4000;

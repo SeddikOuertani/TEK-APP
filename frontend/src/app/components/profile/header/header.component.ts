@@ -17,9 +17,28 @@ export class HeaderComponent implements OnInit {
   
   friendsNumber = 300;  
 
+  pfp : any;
+  pfpChosen = false;
+  pfpSumbitted = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  choosePfp(event : any){
+    if(event.target.value){
+      this.pfp = <File>event.target.files[0];
+      this.pfpChosen = true
+    }
+  }
+
+  submitPfp(){
+    let fd = new FormData()
+    this.pfpSumbitted = true;
+    if(this.pfp){
+      fd.append("pfp", this.pfp, this.pfp.name)
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faBars, faSearch, faBell, faUser, faComment} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -17,6 +17,8 @@ export class NavigationBarComponent implements OnInit {
   chatsIcon = faComment;
 
   searchPalceholder = "Search something ..."
+
+  @Input() currentUserId : any;
 
   constructor() { }
 

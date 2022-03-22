@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharingService } from 'src/app/services/sharing.service';
 
 @Component({
   selector: 'app-home-container',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeContainerComponent implements OnInit {
 
-  constructor() { }
+  currentUserId : any
+
+  constructor(private sharingService : SharingService) { }
 
   ngOnInit(): void {
+    this.getCurrentUserId()
   }
-  
+
+  getCurrentUserId(){
+    this.currentUserId = this.sharingService.getUserSettings()._id
+  }
+
 }

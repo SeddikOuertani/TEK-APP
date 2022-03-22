@@ -28,8 +28,8 @@ userRoute.route('/').get((req, res, next) => {
   })
 })
 // Get single User
-userRoute.route('/read/:id').get((req, res, next) => {
-  User.findById(req.params.id, (error, data) => {
+userRoute.route('/read/:idUser').get((req, res, next) => {
+  User.findById(req.params.idUser, (error, data) => {
     if (error) {
       return next(error)
     } else {

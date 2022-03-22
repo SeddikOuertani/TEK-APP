@@ -57,14 +57,8 @@ export class UserService {
     );
   }
 
-  getUser(id: any): Observable<any> {
-    let url = `${this.baseUrl}/read/${id}`;
-    return this.http.get(url, {headers: this.headers}).pipe(
-      map((res)=> {
-        return res || {}
-      }),
-      catchError(this.errorMgmt)
-    )
+  getUser(idUser: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/read/${idUser}`, {headers: this.headers})
   }
 
   getUserByEmailAndPass(email : string, password : string) : Observable<any>{

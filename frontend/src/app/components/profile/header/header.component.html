@@ -10,7 +10,8 @@
         </button>
     </div>
     <div class="profile-header-info row">
-        <div class="profile-picture-wrapper col-md-2">
+        <div  class="profile-picture-wrapper col-md-2">
+            <fa-icon class="fa-lg pfp-edit-icon" [icon]="editIcon"></fa-icon>
             <img 
                 src="../../../assets/images/auth-first-background.jpg" 
                 width="100%" 
@@ -67,3 +68,7 @@
         </div>
     </div>
 </div>
+
+<form >
+<input hidden (input)="choosePfp($event)" type="file" name="pfp">
+</form>
