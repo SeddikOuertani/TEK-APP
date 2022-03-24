@@ -2,7 +2,7 @@
     <div class="post-header">
         <div class="header-first-row">       
             <div class="pfp-image-wrap">
-                <img class="pfp-image" src="{{user?.imgUrl | userDefaultPfp}}" width="50px" height="50px">
+                <img class="pfp-image" [src]="pfpPath | userDefaultPfp" width="50px" height="50px">
             </div> 
             <div class="user-name-wrap">
                 <span>{{user?.name | titlecase}} {{user?.lastName | titlecase}}</span>

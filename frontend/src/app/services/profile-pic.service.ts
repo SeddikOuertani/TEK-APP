@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProfilePicService {
 
-  baseUrl = 'https://localhost:4200/api/profilePic';
+  baseUrl:string = 'http://localhost:4000/api/profilePics'; 
   headers = new HttpHeaders({
     Accept: 'application/json',
     'Content-Type' : 'multipart/form-data',
@@ -14,12 +14,12 @@ export class ProfilePicService {
 
   constructor(private http : HttpClient) {}
 
-  addProfilePic(){
-    return this.http.post(this.baseUrl, {headers : this.headers});
+  addProfilePic(pfp : any){
+    return this.http.post(`${this.baseUrl}/create`, pfp);
   }
 
   getProfilePic(idUser : any){
-    return this.http.get(`${this.baseUrl}/read/${idUser}`, {headers:this.headers});
+    return this.http.get(`${this.baseUrl}/read/${idUser}`, {headers : new HttpHeaders({accept : 'application/json'})});
   }
 
 }

@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faUser, faThumbsUp, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
 import { PostService } from 'src/app/services/post.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { LikeService } from 'src/app/services/like.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { Like } from 'src/models/like';
-import { toArray } from 'rxjs';
+import { UtilsService } from 'src/app/services/utils.service';
+import { ProfilePicService } from 'src/app/services/profile-pic.service';
 
 @Component({
   selector: 'app-post-elem',
@@ -34,13 +34,17 @@ export class PostElemComponent implements OnInit {
   
   likesCount !: number;
 
+  pfpPath : any
+
   currentUserLikeFound = false;
   
   constructor(
     private postService : PostService,
     private userService : UserService,
     private likeService : LikeService,
-    private sharingService : SharingService) { }
+    private sharingService : SharingService,
+    private utilService : UtilsService,
+    private profilePicService : ProfilePicService) { }
 
   ngOnInit() : void  {
 
@@ -55,6 +59,9 @@ export class PostElemComponent implements OnInit {
     
     //get post likes
     this.getLikes()
+
+    //get post user profile pic
+    this.getPostUserProfilePic()
   }
 
   getPost(){
@@ -67,7 +74,7 @@ export class PostElemComponent implements OnInit {
         this.post = res
 
         //loading media if it exists
-        this.media = res?.media? this.base64ToPic(res?.media) : undefined;
+        this.media = res?.media? this.utilService.base64ToPic(res?.media) : undefined;
       },
       error : (err) => {
         console.log("Error getting Post !"+this.idPost)
@@ -85,6 +92,14 @@ export class PostElemComponent implements OnInit {
       error : (err) => {
         console.log("Error getting user for post : "+this.idPost)
         console.log(err)
+      }
+    })
+  }
+
+  getPostUserProfilePic(){
+    this.profilePicService.getProfilePic(this.postUserId).subscribe({
+      next : (res : any) =>{
+        this.pfpPath = this.utilService.base64ToPic(res?.pfp)
       }
     })
   }
@@ -125,21 +140,4 @@ export class PostElemComponent implements OnInit {
     console.log("share pressed")
   }
 
-
-  
-// Utils functions
-
-  //converting pic buffer data into base64 string
-  bufferToBase64(arr : any) {
-    
-    //arr = new Uint8Array(arr) if it's an ArrayBuffer
-    return btoa(
-       arr.reduce((data : any, byte : any) => data + String.fromCharCode(byte), '')
-    );
-  }
-
-  //converting base64 strings of the pics buffer data into pics data
-  base64ToPic(media: any){
-    return `data:${media.mimetype};base64,${this.bufferToBase64(media.buffer.data)}`;
-  }
 }

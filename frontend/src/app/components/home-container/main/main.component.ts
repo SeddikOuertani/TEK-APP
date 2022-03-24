@@ -1,5 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { SharingService } from 'src/app/services/sharing.service';
 
@@ -12,11 +11,14 @@ export class MainComponent implements OnInit {
 
   refresh = ""
   posts = []
+  idUser : any
 
   constructor(
-    private postService : PostService) { }
+    private postService : PostService,
+    private sharingService : SharingService) { }
 
   ngOnInit(): void {
+    this.idUser = this.sharingService.getUserSettings()._id;
     this.getPosts()
   }
 

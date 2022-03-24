@@ -6,15 +6,18 @@ const multer = require('multer');
 let ProfilePic = require('../models/ProfilePic');
 
 //multer for pic upload
-const uploadMedia = require('../middleware/picUpload')
+const uploadMedia = require('../middleware/picUpload');
 
-profilePicRoute.route('/create/:idUser').ProfilePic(uploadMedia.uploadPic().array('pfp') , (req, res, next) => {
+profilePicRoute.route('/create').post(uploadMedia.uploadPic().array('pfp') , (req, res, next) => {
 
   let newProfilePic = req.body;
 
+  console.log(newProfilePic)
+
   if(req.files[0]){
-    newProfilePic.pfp = req.files[0]
-    newProfilePic.creationDate = new Date(req.body.creationDate)
+    newProfilePic.idUser = req.body.idUser;
+    newProfilePic.pfp = req.files[0];
+    newProfilePic.creationDate = new Date(req.body.creationDate);
   }
 
   ProfilePic.create(newProfilePic, (error, data) => {
@@ -37,8 +40,8 @@ profilePicRoute.route('/read/:idUser').get((req, res) => {
   ProfilePic.find({idUser : req.params.idUser}, (error, data) => {
     if (error) {
       return next(error)
-    } else{
-        res.json(getLatestDate(data)) 
+    }else{   
+      res.json(getLatestDate(data))  
     }
   })
 })
@@ -51,17 +54,23 @@ profilePicRoute.route('/update/:id').put((req, res, next) => {
         if (error) {
             return next(error);
         }else {
-            res.json(data)   
-            console.log('Data updated successfully')
+            res.json(getLatestDate(data))   
         }
     })
 })
 
 //getting converting date to measurable
 function getLatestDate(data){
-    return new Date(Math.max.apply(null,data.map(e => {
-        return new Date(e.creationDate).valueOf()
-    })))
+    if(data.length === 0){
+      return null
+    }
+    let latestPfp = data[0]
+    data.forEach(pfp => {
+      if(pfp.creationDate.valueOf() > latestPfp.creationDate.valueOf()){
+        latestPfp = pfp  
+      }
+    });
+    return latestPfp
 }
 
 module.exports = profilePicRoute;

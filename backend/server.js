@@ -37,8 +37,8 @@ app.use('/api/posts', postRoute);
 app.use('/api/gallery', galleryRoute);
 app.use('/api/likes', likeRoute);
 app.use('/api/shares', shareRoute);
-app.use('/api/comment', commentRoute);
-app.use('/api/profilePic', profilePicRoute);
+app.use('/api/comments', commentRoute);
+app.use('/api/profilePics', profilePicRoute);
 
 // Create port
 const port = process.env.PORT || 4000;

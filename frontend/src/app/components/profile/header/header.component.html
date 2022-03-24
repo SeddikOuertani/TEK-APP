@@ -10,18 +10,18 @@
         </button>
     </div>
     <div class="profile-header-info row">
-        <div  class="profile-picture-wrapper col-md-2">
+        <div (click)="inputClicked(inputPfp)" class="profile-picture-wrapper col-md-2">
             <fa-icon class="fa-lg pfp-edit-icon" [icon]="editIcon"></fa-icon>
             <img 
-                src="../../../assets/images/auth-first-background.jpg" 
+                [src]="pfpPath | userDefaultPfp" 
                 width="100%" 
                 height="100%"
                 class="pfp-image-style">
         </div>
         <div class="user-info-wrapper col">
-            <h3 class="name-last-name"> Mohamed Seddik Ouertani</h3>
+            <h3 class="name-last-name"> {{user.name | titlecase}} {{user.lastName | titlecase}} </h3>
             <p class="friends-number">{{friendsNumber}} friends</p>
-            <input placeholder="Write your bio here..." name="bio" class="form-control" type="text">
+            <input [(ngModel)]="bio" placeholder="Write your bio here..." name="bio" class="form-control" type="text">
         </div>
         <div class="btn-wrapper col-md-3">
             <div class="add-feat">
@@ -69,6 +69,6 @@
     </div>
 </div>
 
-<form >
-<input hidden (input)="choosePfp($event)" type="file" name="pfp">
+<form #pfpForm hidden enctype="multipart/form-data" >
+<input hidden #inputPfp (input)="choosePfp($event)" type="file" name="pfp">
 </form>

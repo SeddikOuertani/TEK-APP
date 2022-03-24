@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, NgZone, Output, EventEmitter, Input } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Router } from '@angular/router';
 import { SharingService } from 'src/app/services/sharing.service';
@@ -12,10 +12,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class PostFormComponent implements OnInit {
 
   postText = ""
-  idUser : any;
   postImage : any;
   imageChosen : boolean = false;
   submitted : boolean = false;
+
+  @Input() idUser : any;
 
   @Output() postSumbitted = new EventEmitter<boolean>();
 
@@ -31,7 +32,6 @@ export class PostFormComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.idUser = this.sharingService.getUserSettings()._id
   }
 
   addPost(){

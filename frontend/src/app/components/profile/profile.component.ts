@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+
     //getting user Id from route params
     this.getCurrentUserId()
 
@@ -59,7 +60,6 @@ export class ProfileComponent implements OnInit {
     this.postService.getPostsByUser(this.currentUserId).subscribe({
       next : (res : any) => {
         this.currentUserPosts = res
-        console.log(this.currentUserPosts)
       },
       error : (err : any) => {
         console.log("Error getting posts by user id")
