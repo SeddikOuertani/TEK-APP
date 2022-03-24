@@ -34,7 +34,7 @@ export class PostElemComponent implements OnInit {
   
   likesCount !: number;
 
-  pfpPath : any
+  pfpPath : any = null
 
   currentUserLikeFound = false;
   
@@ -100,6 +100,9 @@ export class PostElemComponent implements OnInit {
     this.profilePicService.getProfilePic(this.postUserId).subscribe({
       next : (res : any) =>{
         this.pfpPath = this.utilService.base64ToPic(res?.pfp)
+      },
+      error : (err : any) => {
+        console.log("error getting profile pic in post elem")
       }
     })
   }

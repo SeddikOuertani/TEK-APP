@@ -1,8 +1,10 @@
-import { Component, OnInit, NgZone, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, NgZone, Output, EventEmitter, Input} from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Router } from '@angular/router';
-import { SharingService } from 'src/app/services/sharing.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ProfilePicService } from 'src/app/services/profile-pic.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-post-form',
@@ -11,10 +13,14 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class PostFormComponent implements OnInit {
 
+  imageUploadIcon = faImage
+
   postText = ""
   postImage : any;
   imageChosen : boolean = false;
   submitted : boolean = false;
+
+  pfpPath : any = null
 
   @Input() idUser : any;
 
@@ -26,12 +32,14 @@ export class PostFormComponent implements OnInit {
 
   constructor(
     private postService: PostService,
+    private profilePicService : ProfilePicService,
+    private utilService : UtilsService,
     private router : Router,
-    private sharingService : SharingService,
     private ngZone : NgZone,) { 
     }
 
   ngOnInit(): void {
+    this.getCurrentUserProfilePic()
   }
 
   addPost(){
@@ -76,5 +84,19 @@ export class PostFormComponent implements OnInit {
     }
   }
 
+  getCurrentUserProfilePic(){
+    this.profilePicService.getProfilePic(this.idUser).subscribe({
+      next : (res : any) => {
+        this.pfpPath = this.utilService.base64ToPic(res?.pfp)
+      },
+      error : (err : any) => {
+        console.log("error getting profile pic in post-form")
+      }
+    })
+  }
+
+  mediaUploadClick(mediaInput : HTMLElement){
+    mediaInput.click()
+  }
   
 }

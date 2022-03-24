@@ -19,7 +19,7 @@
                 class="pfp-image-style">
         </div>
         <div class="user-info-wrapper col">
-            <h3 class="name-last-name"> {{user.name | titlecase}} {{user.lastName | titlecase}} </h3>
+            <h3 class="name-last-name"> {{user?.name | titlecase}} {{user?.lastName | titlecase}} </h3>
             <p class="friends-number">{{friendsNumber}} friends</p>
             <input [(ngModel)]="bio" placeholder="Write your bio here..." name="bio" class="form-control" type="text">
         </div>
