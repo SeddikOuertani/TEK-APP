@@ -49,3 +49,7 @@
     background-color: rgb(66, 191, 221);
 }
 
+.active-link:hover{
+    background-color: rgb(6, 63, 109) ;
+    color : white;
+}

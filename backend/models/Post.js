@@ -13,7 +13,6 @@ let Post = new Schema({
             fieldname : { type : String },
             originalname : { type : String },
             encoding : { type : String },
-            encoding : { type : String },
             mimetype : { type : String },
             buffer : { type : Buffer },
         },

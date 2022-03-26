@@ -3,13 +3,29 @@ const Schema = mongoose.Schema;
 // Define collection and schema
 let Comment = new Schema({
    
-    userId : {
+    idUser: {
         type : String
     },
 
-    postId : {
+    idParent : {
        type : String
     },
+
+    text : {
+        type : String
+    },
+
+    media : {
+        fieldname : { type : String },
+        originalname : { type : String },
+        encoding : { type : String },
+        mimetype : { type : String },
+        buffer : { type : Buffer },
+    },
+
+    creationDate : {
+        type : Date
+    }
 
 },
 {

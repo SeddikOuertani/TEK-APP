@@ -1,5 +1,4 @@
 .comment-wrapper{
-    margin-bottom: 1vh;
     padding: 5px;
 }
 
@@ -30,16 +29,22 @@
 }
 
 .comment-body{
-    margin-top: 1vh;
-    margin-left: 1vh;
     border-radius: 7px;
+    width: 100%;
 }
 
 .comment-text{
     background-color : white;
-    width : min-content;
     word-wrap: break-word;
+    margin: 1vh 1vh;
     padding-right : 10px;
     padding-left : 10px; 
     border-radius : 5px;
+}
+
+.badge-secondary{
+    background-color: rgba(0,0,0,0);
+    color : rgb(255, 102, 179);
+    font-weight: 200;
+    border: 0.5px rgb(255, 102, 179) solid;     
 }

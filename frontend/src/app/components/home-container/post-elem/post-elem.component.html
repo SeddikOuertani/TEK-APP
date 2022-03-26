@@ -33,17 +33,17 @@
 
         <hr>
         <app-post-reaction-row
-            [likeFound]="currentUserLikeFound"
+            [likeFound]="userLikeFound"
             (likePressed)="addOrDeleteLike($event)"
-            (commentPressed)="addComment($event)"
+            (commentPressed)="focusComment($event)"
             (sharePressed)="addShare($event)">
         </app-post-reaction-row>
         <hr>
         <div class="make-comment-wrapper">
-            <app-comment-form></app-comment-form>
+            <app-comment-form [cf]="commentPressed" [idParent]="idPost" [idUser]="currentUser._id"></app-comment-form>
         </div>
     </div>
     <div class="comments-list-wrapper">
-        <app-comment-list></app-comment-list>
+        <app-comment-list [postUserId]="postUserId" [comments]="comments"></app-comment-list>
     </div>
 </div>

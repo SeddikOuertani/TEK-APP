@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { faComment, faShare, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-post-reaction-row',
@@ -12,8 +13,17 @@ export class PostReactionRowComponent implements OnInit {
   likeIcon = faThumbsUp;
   commentIcon = faComment;
   shareIcon = faShare;
+  
+  private likeFoundObservable = new BehaviorSubject<boolean>(false);
+  
+  @Input() 
+    set likeFound(LikeFound : boolean){
+      this.likeFoundObservable.next(LikeFound)
+    } 
 
-  @Input() likeFound !: boolean;
+    get likeFound(){
+      return this.likeFoundObservable.getValue()
+    }
 
   @Output() likePressed = new EventEmitter<boolean>();
   @Output() commentPressed = new EventEmitter<boolean>()
@@ -23,16 +33,21 @@ export class PostReactionRowComponent implements OnInit {
   @ViewChild('commentElem') commentElem !: ElementRef
   @ViewChild('shareElem') shareElem !: ElementRef
   
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit(): void {
-    this.isLikeFound();
+    this.likeIsFound()
   }
 
-  isLikeFound(){
-    if(this.likeFound){
-      this.likeElem.nativeElement.classList.add('reaction-pressed');
-    }
+  likeIsFound(){
+    this.likeFoundObservable.subscribe({
+      next : (lf : boolean) => {
+        if(lf == true){
+          this.likeElem.nativeElement.classList.add('reaction-pressed')
+        }
+      }
+    })
   }
 
   likePress(){
@@ -42,12 +57,10 @@ export class PostReactionRowComponent implements OnInit {
 
   commentPress(){
     this.commentPressed.emit(true)
-    this.togglePressedStyle(this.commentElem);
   }
   
   sharePress(){
     this.sharePressed.emit(true)
-    this.togglePressedStyle(this.shareElem);
   }
 
   togglePressedStyle(elem : ElementRef){

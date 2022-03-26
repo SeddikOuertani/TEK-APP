@@ -1,16 +1,19 @@
 <div class="comment-wrapper">
     <div class="comment-header">
         <div class="pfp-img-wrapper">
-            <img class="pfp-img" src="auth-first-background.jpg" width="30px" height="30px">
+            <img class="pfp-img" [src]="pfpPath | userDefaultPfp" width="30px" height="30px">
         </div>
         <div class="user-name">
-            <span>name lastName</span>
+            <span>
+                {{userName | titlecase}} {{userLastName | titlecase}} 
+                <span *ngIf="commentUserId == postUserId" class="badge badge-secondary">author</span> 
+            </span>
         </div>
         <div class="comment-date">
-            5 hrs ago
+            {{creationDate | date}}
         </div>
     </div>
     <div class="comment-body">
-        <p class="comment-text">%LDQmùw*:*qmc*lmdk</p>
+        <p class="comment-text">{{text}}</p>
     </div>
 </div>

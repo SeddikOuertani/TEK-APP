@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faUser, faThumbsUp, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
@@ -7,6 +7,7 @@ import { SharingService } from 'src/app/services/sharing.service';
 import { Like } from 'src/models/like';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ProfilePicService } from 'src/app/services/profile-pic.service';
+import { CommentService } from 'src/app/services/comment.service';
 
 @Component({
   selector: 'app-post-elem',
@@ -18,7 +19,6 @@ export class PostElemComponent implements OnInit {
   likeIcon = faThumbsUp;
   commentIcon = faComment;
   shareIcon = faShare;
-
   personIcon = faUser;
 
   @Input() idPost !: any;
@@ -31,12 +31,11 @@ export class PostElemComponent implements OnInit {
   post ? : any;
   media ? : any;
   likes : Like[] = [];
-  
+  comments:  Comment[] = [];
   likesCount !: number;
-
-  pfpPath : any = null
-
-  currentUserLikeFound = false;
+  userLikeFound : boolean = false;
+  pfpPath : any = null;
+  commentPressed : boolean = false;
   
   constructor(
     private postService : PostService,
@@ -44,7 +43,8 @@ export class PostElemComponent implements OnInit {
     private likeService : LikeService,
     private sharingService : SharingService,
     private utilService : UtilsService,
-    private profilePicService : ProfilePicService) { }
+    private profilePicService : ProfilePicService,
+    private commentService : CommentService) { }
 
   ngOnInit() : void  {
 
@@ -62,6 +62,9 @@ export class PostElemComponent implements OnInit {
 
     //get post user profile pic
     this.getPostUserProfilePic()
+
+    //get post comments
+    this.getComments()
   }
 
   getPost(){
@@ -112,13 +115,36 @@ export class PostElemComponent implements OnInit {
     this.likeService.getLikesByParentId(this.idPost).subscribe({
       next : (res) => {
         let likes = res
-        Object.values(likes).forEach((like : any) => this.likes.push(new Like(like._id,like.userId,like.parentId)))
+        Object.values(likes).forEach((like : any) => this.likes.push(new Like(like._id,like.idUser,like.idParent)))
         this.likesCount = this.likes.length
+
+        //check if user Like is found
+        this.userLikeFound = this.findCurrentUserLike(this.likes);
       },
       error : (err) => {
         console.log(err)
       }
     })
+  }
+
+  getComments(){
+    this.commentService.getCommentsByParentId(this.idPost).subscribe({
+      next : (res : any) => {
+        this.comments = res
+      },
+      error : (err : any) => {
+        console.log("error getting comment list for post "+this.idPost)
+      }
+    })
+  }
+
+  findCurrentUserLike(likes : Like[]){
+    let like = likes.find((like : Like) => like.getIdUser() == this.currentUser._id);
+    if(like){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   addOrDeleteLike(event : any){
@@ -133,14 +159,15 @@ export class PostElemComponent implements OnInit {
     })
   }
   
-  addComment(event : any){
-    // this.likeService.createLike(this.currentUser._id, this.idPost);  
-    console.log("comment pressed")
+  focusComment(event : any){
+    this.commentPressed = event
   }
 
   addShare(event : any){
     // this.likeService.createLike(this.currentUser._id, this.idPost);  
     console.log("share pressed")
   }
+
+
 
 }
