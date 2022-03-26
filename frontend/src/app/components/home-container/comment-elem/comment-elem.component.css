@@ -34,12 +34,11 @@
 }
 
 .comment-text{
-    background-color : white;
-    word-wrap: break-word;
-    margin: 1vh 1vh;
-    padding-right : 10px;
-    padding-left : 10px; 
+    margin: 1vh;
+    padding: 1vw;
     border-radius : 5px;
+    background-color: white;
+    width: fit-content;
 }
 
 .badge-secondary{

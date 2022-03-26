@@ -18,5 +18,9 @@ export class CommentService {
   postComment(commentBody : any){
     return  this.http.post(`${this.baseUrl}/create`, commentBody);
   }
+
+  deleteComment(commentId : any){
+    return this.http.delete(`${this.baseUrl}/delete/${commentId}`, {headers : this.headers});
+  }
   
 }

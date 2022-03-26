@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,11 +8,13 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 })
 export class ClubElemComponent implements OnInit {
 
+  
   joinIcon = faCheckCircle;
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
 }

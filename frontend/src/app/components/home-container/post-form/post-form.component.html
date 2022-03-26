@@ -4,7 +4,7 @@
         <form [formGroup]="postForm" (ngSubmit)="addPost()" method="POST" name="form" enctype="multipart/form-data">
             <div class="first-row">
                 <div class="pfp-wrapper">
-                    <img class="pfp" [src]="pfpPath | userDefaultPfp" width="50px">
+                    <img class="pfp" [src]="pfpPath | userDefaultPfp" width="50px" height="50px">
                 </div>
                 <div class="input-wrapper">
                     <textarea id="text" name="text" formControlName="text" type="text" class="form-control text-area" placeholder="What's on your mind ?"></textarea>

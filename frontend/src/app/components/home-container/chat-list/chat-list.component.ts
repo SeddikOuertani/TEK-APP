@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ProfilePicService } from 'src/app/services/profile-pic.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-chat-list',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatListComponent implements OnInit {
 
-  constructor() { }
+  @Input() currentUserId : any;
+  
+  chatList : any[] = []
+
+  constructor(
+    private userService : UserService) { }
 
   ngOnInit(): void {
+  
+    //getting users for chat list 
+    this.getUsers();
+
+  }
+
+  getUsers(){
+    this.userService.getUsers().subscribe({
+      next : (res : any) => {
+        this.chatList = res;
+        console.log(res)
+      },
+      error : (err : any) => {
+        console.log("Error getting users for chat list")
+      }
+    })
   }
 
 }

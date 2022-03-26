@@ -48,6 +48,7 @@ import { TimePipe } from './pipes/time.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserDefaultPfpPipe } from './pipes/user-default-pfp.pipe';
 import { PostMediaPipe } from './pipes/post-media.pipe';
+import { ChatListPipePipe } from './pipes/chat-list-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { PostMediaPipe } from './pipes/post-media.pipe';
     TimePipe,
     UserDefaultPfpPipe,
     PostMediaPipe,
+    ChatListPipePipe,
   ],
   imports: [
     HttpClientModule,

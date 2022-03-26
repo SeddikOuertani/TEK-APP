@@ -30,11 +30,14 @@ export class PostElemComponent implements OnInit {
   user ? : any;
   post ? : any;
   media ? : any;
+  pfpPath : any = null;
+
   likes : Like[] = [];
   comments:  Comment[] = [];
+
   likesCount !: number;
+  commentsCount !: number;
   userLikeFound : boolean = false;
-  pfpPath : any = null;
   commentPressed : boolean = false;
   
   constructor(
@@ -131,6 +134,7 @@ export class PostElemComponent implements OnInit {
     this.commentService.getCommentsByParentId(this.idPost).subscribe({
       next : (res : any) => {
         this.comments = res
+        this.commentsCount = res.length
       },
       error : (err : any) => {
         console.log("error getting comment list for post "+this.idPost)
