@@ -6,7 +6,7 @@
         <div class="user-name">
             <span>
                 {{userName | titlecase}} {{userLastName | titlecase}} 
-                <span *ngIf="commentUserId == postUserId" class="badge badge-secondary">author</span> 
+                <span *ngIf="commentUserId == postUserId" class="badge badge-secondary">author</span>
             </span>
         </div>
         <div class="comment-date">
@@ -15,5 +15,20 @@
     </div>
     <div class="comment-body">
         <p class="comment-text">{{text}}</p>
+        <div id="options-wrapper" class="options-wrapper">
+            <div class="dropdown options-trigger">
+                <button class="btn dropdown-toggle" type="button" id="optionsDropButton" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu transition-2s" aria-labelledby="optionsDropButton">
+                    <div class="options-list">
+                        <div class="edit-icon-wrapper transition-2s">
+                            <fa-icon [icon]="editIcon"></fa-icon>
+                        </div>
+                        <div class="delete-icon-wrapper transition-2s">
+                            <fa-icon [icon]="deleteIcon"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
     </div>
 </div>

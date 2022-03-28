@@ -27,7 +27,6 @@ export class ChatListComponent implements OnInit {
     this.userService.getUsers().subscribe({
       next : (res : any) => {
         this.chatList = res;
-        console.log(res)
       },
       error : (err : any) => {
         console.log("Error getting users for chat list")

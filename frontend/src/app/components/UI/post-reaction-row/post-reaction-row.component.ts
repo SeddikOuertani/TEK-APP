@@ -15,7 +15,17 @@ export class PostReactionRowComponent implements OnInit {
   shareIcon = faShare;
   
   private likeFoundObservable = new BehaviorSubject<boolean>(false);
+  private commentFoundObservable = new BehaviorSubject<boolean>(false);
   
+  @Input() 
+    set commentFound(commentFound : boolean){
+      this.commentFoundObservable.next(commentFound)
+    } 
+
+    get commentFound(){
+      return this.commentFoundObservable.getValue()
+    }
+
   @Input() 
     set likeFound(LikeFound : boolean){
       this.likeFoundObservable.next(LikeFound)
@@ -38,6 +48,7 @@ export class PostReactionRowComponent implements OnInit {
 
   ngOnInit(): void {
     this.likeIsFound()
+    this.commentIsFound()
   }
 
   likeIsFound(){
@@ -45,6 +56,16 @@ export class PostReactionRowComponent implements OnInit {
       next : (lf : boolean) => {
         if(lf == true){
           this.likeElem.nativeElement.classList.add('reaction-pressed')
+        }
+      }
+    })
+  }
+
+  commentIsFound(){
+    this.commentFoundObservable.subscribe({
+      next : (cf : boolean) => {
+        if(cf == true){
+          this.commentElem.nativeElement.classList.add('reaction-pressed')
         }
       }
     })

@@ -8,6 +8,7 @@ import { Like } from 'src/models/like';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ProfilePicService } from 'src/app/services/profile-pic.service';
 import { CommentService } from 'src/app/services/comment.service';
+import { throwError, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-post-elem',
@@ -38,6 +39,7 @@ export class PostElemComponent implements OnInit {
   likesCount !: number;
   commentsCount !: number;
   userLikeFound : boolean = false;
+  userCommentFound : boolean = false;
   commentPressed : boolean = false;
   
   constructor(
@@ -97,7 +99,7 @@ export class PostElemComponent implements OnInit {
       },
       error : (err) => {
         console.log("Error getting user for post : "+this.idPost)
-        console.log(err)
+        console.log(throwError(err.message))
       }
     })
   }
@@ -131,12 +133,19 @@ export class PostElemComponent implements OnInit {
   }
 
   getComments(){
+
     this.commentService.getCommentsByParentId(this.idPost).subscribe({
       next : (res : any) => {
         this.comments = res
         this.commentsCount = res.length
+
+        
+        //check if user Like is found
+        this.userCommentFound = this.findCurrentUserComment(res);
+        console.log(this.userCommentFound)
+        
       },
-      error : (err : any) => {
+      error : () => {
         console.log("error getting comment list for post "+this.idPost)
       }
     })
@@ -145,6 +154,15 @@ export class PostElemComponent implements OnInit {
   findCurrentUserLike(likes : Like[]){
     let like = likes.find((like : Like) => like.getIdUser() == this.currentUser._id);
     if(like){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  findCurrentUserComment(comments : any[]){
+    let comment = comments.find(comment => comment.idUser == this.currentUser._id);
+    if(comment){
       return true;
     }else{
       return false;

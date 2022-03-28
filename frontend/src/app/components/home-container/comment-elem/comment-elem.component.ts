@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faEdit, faThumbsUp, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { zip } from 'rxjs';
 import { ProfilePicService } from 'src/app/services/profile-pic.service';
 import { UserService } from 'src/app/services/user.service';
@@ -10,6 +11,10 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./comment-elem.component.css']
 })
 export class CommentElemComponent implements OnInit {
+
+  deleteIcon = faTrash;
+  editIcon = faEdit;
+  likeIcon = faThumbsUp;
 
   @Input() postUserId : any;
   @Input() comment : any; 

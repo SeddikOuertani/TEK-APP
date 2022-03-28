@@ -2,7 +2,8 @@
     background-color: rgb(255, 255, 255);
     padding : 1vh 2vw 0 2vw; 
     border-radius: 5px;
-    border : 1px solid rgb(8, 75, 131)
+    border : 1px solid rgb(8, 75, 131);
+    margin : 0 1vh;
 }
 
 .menu-icon-wrapper{

@@ -4,7 +4,7 @@
 
 .comment-header{
     display: flex;
-    direction: ltr;
+    flex-direction: row;
     gap : 1vh
 }
 
@@ -20,7 +20,21 @@
 .user-name{
     flex : 1;
     font-weight: 500;
+    display: flex ;
+    flex-direction: row;
 }
+
+.more-options{
+    color : rgb(143, 143, 143);
+    font-weight: 600;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.more-options:hover{
+    color: rgb(0, 0, 0);
+}
+
 .comment-date{
     flex-wrap: wrap;
     text-align: right;
@@ -31,6 +45,8 @@
 .comment-body{
     border-radius: 7px;
     width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 .comment-text{
@@ -39,6 +55,7 @@
     border-radius : 5px;
     background-color: white;
     width: fit-content;
+    box-shadow: rgba(0,0,0,0.2) 0.5px 0.5px 1vh ;
 }
 
 .badge-secondary{
@@ -46,4 +63,41 @@
     color : rgb(255, 102, 179);
     font-weight: 200;
     border: 0.5px rgb(255, 102, 179) solid;     
+}
+
+.dropdown-menu{
+    background-color: rgba(0,0,0,0);
+    width: 4vw;
+    margin: auto;
+    border : none;
+    outline : none;
+}
+
+.options-list{
+    display: flex;
+    background-color: rgba(0,0,0,0);
+    flex-direction: column;
+    row-gap: 1vh;
+    justify-content: center;
+    align-items: center;
+    width: min-content;
+    margin-left: 2vw;
+    border : none;
+    outline: none;
+}
+
+.edit-icon-wrapper{
+    color : rgb(66, 191, 221)
+}
+
+.edit-icon-wrapper:hover{
+    color : rgb(43, 123, 143)
+}
+
+.delete-icon-wrapper{
+    color : rgb(187, 52, 28)
+}
+
+.delete-icon-wrapper:hover{
+    color : rgb(109, 31, 17)
 }

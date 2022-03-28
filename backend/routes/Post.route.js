@@ -1,13 +1,13 @@
 const express = require('express');
 const postRoute = express.Router();
-const multer = require('multer');
+
 // Postmodel
 let Post = require('../models/Post');
-// Add Post const
 
 //multer for pic upload
 const uploadMedia = require('../middleware/picUpload')
 
+//add post
 postRoute.route('/create').post(uploadMedia.uploadPic().array('media') ,async (req, res, next) => {
 
   let newPost = req.body;
@@ -69,7 +69,6 @@ postRoute.route('/update/:id').put((req, res, next) => {
   }, (error, data) => {
     if (error) {
       return next(error);
-      console.log(error)
     } else {
       res.json(data)
       console.log('Data updated successfully')
@@ -88,4 +87,5 @@ postRoute.route('/delete/:id').delete((req, res, next) => {
     }
   })
 })
+
 module.exports = postRoute;

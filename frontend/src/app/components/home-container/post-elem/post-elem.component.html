@@ -34,6 +34,7 @@
         <hr>
         <app-post-reaction-row
             [likeFound]="userLikeFound"
+            [commentFound]="userCommentFound"
             (likePressed)="addOrDeleteLike($event)"
             (commentPressed)="focusComment($event)"
             (sharePressed)="addShare($event)">
